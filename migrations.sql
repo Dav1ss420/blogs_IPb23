@@ -14,3 +14,9 @@ VALUES
 ("Ka uztaisit siermaizi?");
 
 SELECT * FROM posts;
+
+SELECT * FROM posts
+WHERE id=1;
+
+SELECT * FROM posts
+WHERE content LIKE "%o%";

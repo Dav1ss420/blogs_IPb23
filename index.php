@@ -1,35 +1,35 @@
 <?php
-
 require "functions.php";
+require "Database.php";
+$config = require("config.php");
 
-echo"Ello";
+$db = new Database($config ["database"]);
+$select = "SELECT * FROM posts";
+// Meklēšanas poga - submit un input
+// Karakstit kka PHP
+// Atgriezt datus no SQL datu bāzes
 
-
-// 1. Izveidot DB ✔
-// 2. Savienot ar DB ✔
-// 3. Izvadit datus ✔
-// db nosaukums, parole, lietotajvards
-
-
-// Data Nource Name
-
-
-$dsn = "mysql:host=localhost;port=3306;user=root;password=;dbname=blog_ipb23;charset=utf8mb4";
-
-// PDO - PHP Data Object
-$pdo = new PDO($dsn);
-
-//1 Sagatavot vaicajumu (statement)
-$statement = $pdo->prepare("SELECT * FROM posts");
-//2. izpildit statement
-$statement->execute();
-// 3. Dabut datus no DB
-
-$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-//dd($posts [0] ["content"]);
-echo"<ul>";
-foreach($posts as $posts){
-    echo "<li>" . $posts["content"] . "</li>";
+$params = [];
+if(isset($_GET["search_query"]) && $_GET["search_query"] != "" ) {
+    $search_query = "%" . $_GET["search_query"] . "%";
+    $select .= "WHERE content LIKE :nosaukums"; //Sagatavotais parametrs
+    $params = ["nosaukums" =>$search_query]; //Saistītais Parametrs
 }
-echo"</ul>";
+$posts = $db->query($select, $params)->fetchAll();
+
+echo "<h1>Blogs</h1>";
+
+echo "<form>";
+echo "<input name='search_query' />";
+echo "<button>Meklēt</button>";
+echo "</form>";
+
+if(count($posts) == 0 ){
+    echo "Nav Atrasts";
+}
+
+echo "<ul>";
+    foreach ($posts as $post){
+        echo "<li>" . $post["content"] . "</li>";
+    }
+echo "</ul>";
