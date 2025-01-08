@@ -1,22 +1,22 @@
-CREATE DATABASE blog_ipb23;
-
+/*CREATE DATABASE blog_ipb23;
+*/
 USE blog_ipb23;
 
-CREATE TABLE posts(
+CREATE TABLE categories(
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	content VARCHAR(5200)
 );
-INSERT INTO posts
+INSERT INTO categories
 (content)
 VALUES
-("Driz bus svetki"),
-("Otrs bloga ieraksts"),
-("Ka uztaisit siermaizi?");
+("Svētki"),
+("Mūzika"),
+("Sports");
 
-SELECT * FROM posts;
+SELECT * FROM categories;
 
-SELECT * FROM posts
+SELECT * FROM categories
 WHERE id=1;
 
-SELECT * FROM posts
+SELECT * FROM categories
 WHERE content LIKE "%o%";
