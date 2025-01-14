@@ -13,10 +13,10 @@ VALUES
 ("Mūzika"),
 ("Sports");
 
-SELECT * FROM categories;
+SELECT * FROM posts;
 
-SELECT * FROM categories
+SELECT * FROM posts
 WHERE id=1;
 
-SELECT * FROM categories
+SELECT * FROM posts
 WHERE content LIKE "%o%";

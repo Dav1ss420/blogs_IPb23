@@ -1,10 +1,6 @@
 <?php
-require "functions.php";
-require "Database.php";
-$config = require("config.php");
 
-$db = new Database($config ["database"]);
-$select = "SELECT * FROM categories";
+$select = "SELECT * FROM posts";
 // Meklēšanas poga - submit un input
 // Karakstit kka PHP
 // Atgriezt datus no SQL datu bāzes
@@ -15,6 +11,6 @@ if(isset($_GET["search_query"]) && $_GET["search_query"] != "" ) {
     $select .= "WHERE content LIKE :nosaukums"; //Sagatavotais parametrs
     $params = ["nosaukums" =>$search_query]; //Saistītais Parametrs
 }
-$posts = $db->query($select, $params)->fetchAll();
+$categories = $db->query($select, $params)->fetchAll();
 
 require "views/index.view.php";
